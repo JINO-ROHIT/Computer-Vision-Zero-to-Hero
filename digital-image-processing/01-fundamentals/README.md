@@ -60,3 +60,16 @@ It's determined by the number of bits used to represent each pixel.
 
 ![alt text](image-2.png)
 
+#### Image Interpolation
+
+Interpolation is the process of using known data to estimate values at unknown locations.
+
+1. The Nearest Neighbor Interpolation
+
+Suppose that an image of size 500 x 500 pixels has to be enlarged 1.5 times to 750 x 750 pixels.
+
+A simple way to visualize zooming is to create an imaginary 750 x 750 pixels. 
+A grid with the same pixel spacing as the original image, then shrink it so that it exactly overlays the original image. 
+Obviously, the pixel spacing in the shrunken 750 750 grid will be less than the pixel spacing in the original image.
+To assign an intensity value to any point in the overlay, we look for its closest pixel in the underlying original image and assign the intensity of that pixel to the new pixel in the 750 750 grid.
+When intensities have been assigned to all the points in the overlay grid, we expand it back to the specified size to obtain the resized image.

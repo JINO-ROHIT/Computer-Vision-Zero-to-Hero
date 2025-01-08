@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      margin: 20px;
+    }
+    .controls {
+      margin: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .speed-control {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Slow Nearest Neighbor Interpolation</h2>
+    <div class="controls">
+      <button onclick="toggleAnimation()">Start/Stop Animation</button>
+      <div class="speed-control">
+        <label for="speed">Speed:</label>
+        <input type="range" id="speed" min="1" max="100" value="10">
+        <span id="speedValue">0.01</span>
+      </div>
+    </div>
+    <canvas id="interpolationCanvas" width="400" height="400"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('interpolationCanvas');
+    const ctx = canvas.getContext('2d');
+    const speedSlider = document.getElementById('speed');
+    const speedValue = document.getElementById('speedValue');
+    let animationId;
+    let isAnimating = false;
+
+    // Original small image (4x4)
+    const originalPixels = [
+      [50, 100, 150, 200],
+      [100, 150, 200, 250],
+      [150, 200, 250, 200],
+      [200, 250, 200, 150]
+    ];
+
+    // Animation parameters
+    let scale = 1;
+    const targetScale = 4;
+    let animationSpeed = 0.01;
+
+    speedSlider.addEventListener('input', function() {
+      animationSpeed = this.value / 1000;
+      speedValue.textContent = animationSpeed.toFixed(3);
+    });
+
+    function drawGrid(size, pixels) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      const pixelSize = canvas.width / size;
+      
+      // Draw pixels
+      for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+          const originalX = Math.floor(x / scale);
+          const originalY = Math.floor(y / scale);
+          
+          // Get nearest neighbor value
+          const value = originalPixels[Math.min(originalY, originalPixels.length-1)][Math.min(originalX, originalPixels[0].length-1)];
+          
+          ctx.fillStyle = `rgb(${value},${value},${value})`;
+          ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+
+          // Highlight current pixel being processed
+          if (Math.abs(x / scale - Math.floor(x / scale)) < 0.1 && 
+              Math.abs(y / scale - Math.floor(y / scale)) < 0.1) {
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+          }
+        }
+      }
+
+      // Draw grid lines
+      ctx.strokeStyle = '#666';
+      ctx.lineWidth = 0.5;
+      
+      for (let i = 0; i <= size; i++) {
+        // Vertical lines
+        ctx.beginPath();
+        ctx.moveTo(i * pixelSize, 0);
+        ctx.lineTo(i * pixelSize, canvas.height);
+        ctx.stroke();
+        
+        // Horizontal lines
+        ctx.beginPath();
+        ctx.moveTo(0, i * pixelSize);
+        ctx.lineTo(canvas.width, i * pixelSize);
+        ctx.stroke();
+      }
+
+      // Add scale indicator
+      ctx.fillStyle = 'black';
+      ctx.font = '14px Arial';
+      ctx.fillText(`Scale: ${scale.toFixed(2)}x`, 10, 20);
+    }
+
+    function animate() {
+      if (scale < targetScale) {
+        scale += animationSpeed;
+        drawGrid(Math.floor(4 * scale), originalPixels);
+        animationId = requestAnimationFrame(animate);
+      } else {
+        scale = targetScale;
+        drawGrid(Math.floor(4 * scale), originalPixels);
+      }
+    }
+
+    function toggleAnimation() {
+      if (isAnimating) {
+        cancelAnimationFrame(animationId);
+        scale = 1;
+      } else {
+        animate();
+      }
+      isAnimating = !isAnimating;
+    }
+
+    // Initial draw
+    drawGrid(4, originalPixels);
+  </script>
+</body>
+</html>
