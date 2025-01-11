@@ -60,7 +60,7 @@ It's determined by the number of bits used to represent each pixel.
 
 ![alt text](image-2.png)
 
-#### Image Interpolation
+#### Image Interpolation ( all 3 implemented in algorithm section)
 
 Interpolation is the process of using known data to estimate values at unknown locations.
 
@@ -73,3 +73,69 @@ A grid with the same pixel spacing as the original image, then shrink it so that
 Obviously, the pixel spacing in the shrunken 750 750 grid will be less than the pixel spacing in the original image.
 To assign an intensity value to any point in the overlay, we look for its closest pixel in the underlying original image and assign the intensity of that pixel to the new pixel in the 750 750 grid.
 When intensities have been assigned to all the points in the overlay grid, we expand it back to the specified size to obtain the resized image.
+
+2. bilinear interpolation
+
+The problem with nearest neighbor is that it produces blobs and pixels get affected, bilinear proposes to use 4 neighboring pixels to estimate the pixel values instead of one.
+
+v(x, y) = ax + by + cxy + d
+
+3. bicubic interpolation
+
+![alt text](image-3.png)
+
+use 16 points
+
+3 > 2 > 1 in terms of quality but tradesoff between computation.
+
+
+### Using the image addition for noise reduction.
+
+![alt text](image-4.png)
+
+Consider g(x, y) as a corrupted image where n noise is added to f(x, y).
+
+You can reduce the noise in the image but adding slightly noised images if -1
+1. the pixels and noise is uncorrelated.
+2. The average value of the noise at any pixel is zero.
+
+If the constraints follow, you can simply average K less noisy images and approximate this.
+
+![alt text](image-5.png)
+
+![alt text](math-proof.jpeg)
+
+
+#### Image transformation using logical operators
+
+![alt text](image-6.png)
+
+
+### Spatial Operations
+
+Operations performed directly on the pixels of an image,
+
+1. single-pixel operations
+
+Altering the intensity of its pixels individually using a transformation function, T
+
+s = T(z)
+
+2. neighborhood operations
+
+The value of a pixel is determined by a specified operation on the neighborhood of pixels in the input image.
+
+3. geometric spatial transformations
+
+These transformations modify the spatial arrangement of pixels in an image.
+
+![alt text](image-7.png)
+
+Affine transformations include scaling, translation, rotation, and shearing. The key characteristic of an affine transformation in 2-D is that it preserves points, straight lines, and planes.
+
+![alt text](image-8.png)
+
+This transformation can scale, rotate, translate, or sheer an image, depending on the values chosen for the elements of matrix A.
+
+![alt text](image-9.png)
+
