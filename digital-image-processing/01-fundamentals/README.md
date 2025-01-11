@@ -2,7 +2,7 @@
 
 Formally, an digitalimage is represented as f(x, y) where x and y are spatial co-ordinates and each element in the matrix is the pixel intensity at position (x, y), or the amplitude, L.
 
-![alt text](image.png)
+![alt text../images/](image.png)
 
 The world that we see with our eyes is an example of analog image, which is a continuous representations of visual information, like a wave form.
 A digital image is a discrete approximation of this continuous image.
@@ -44,7 +44,7 @@ A 1024×1024 image displayed on:
     - A billboard (200×200 inches) = 5.12 PPI (very pixelated)
 ```
 
-![alt text](image-1.png)
+![alt text](../images/image-1.png)
 
 
 #### Intensity Resolution
@@ -58,7 +58,7 @@ It's determined by the number of bits used to represent each pixel.
 8-bit: 2⁸ = 256 levels of gray (standard grayscale)
 24-bit: 8 bits each for R,G,B = 16.7 million colors
 
-![alt text](image-2.png)
+![alt text](../images/image-2.png)
 
 #### Image Interpolation ( all 3 implemented in algorithm section)
 
@@ -82,7 +82,7 @@ v(x, y) = ax + by + cxy + d
 
 3. bicubic interpolation
 
-![alt text](image-3.png)
+![alt text](../images/image-3.png)
 
 use 16 points
 
@@ -91,7 +91,7 @@ use 16 points
 
 ### Using the image addition for noise reduction.
 
-![alt text](image-4.png)
+![alt text](../images/image-4.png)
 
 Consider g(x, y) as a corrupted image where n noise is added to f(x, y).
 
@@ -101,14 +101,14 @@ You can reduce the noise in the image but adding slightly noised images if -1
 
 If the constraints follow, you can simply average K less noisy images and approximate this.
 
-![alt text](image-5.png)
+![alt text](../images/image-5.png)
 
 ![alt text](math-proof.jpeg)
 
 
 #### Image transformation using logical operators
 
-![alt text](image-6.png)
+![alt text](../images/image-6.png)
 
 
 ### Spatial Operations
@@ -129,13 +129,13 @@ The value of a pixel is determined by a specified operation on the neighborhood 
 
 These transformations modify the spatial arrangement of pixels in an image.
 
-![alt text](image-7.png)
+![alt text](../images/image-7.png)
 
 Affine transformations include scaling, translation, rotation, and shearing. The key characteristic of an affine transformation in 2-D is that it preserves points, straight lines, and planes.
 
-![alt text](image-8.png)
+![alt text](../images/image-8.png)
 
 This transformation can scale, rotate, translate, or sheer an image, depending on the values chosen for the elements of matrix A.
 
-![alt text](image-9.png)
+![alt text](../images/image-9.png)
 
