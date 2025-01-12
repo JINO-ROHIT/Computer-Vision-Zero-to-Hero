@@ -66,6 +66,8 @@ Interpolation is the process of using known data to estimate values at unknown l
 
 1. The Nearest Neighbor Interpolation
 
+[notebook](../algorithms/01-nearest-neighbor-interpolation.ipynb)
+
 Suppose that an image of size 500 x 500 pixels has to be enlarged 1.5 times to 750 x 750 pixels.
 
 A simple way to visualize zooming is to create an imaginary 750 x 750 pixels. 
@@ -90,6 +92,8 @@ use 16 points
 
 
 ### Using the image addition for noise reduction.
+
+[notebook](../algorithms/02-noise-averaging.ipynb)
 
 ![alt text](../images/image-4.png)
 
