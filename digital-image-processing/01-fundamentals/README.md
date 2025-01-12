@@ -2,7 +2,7 @@
 
 Formally, an digitalimage is represented as f(x, y) where x and y are spatial co-ordinates and each element in the matrix is the pixel intensity at position (x, y), or the amplitude, L.
 
-![alt text../images/](image.png)
+![alt text](../images/image.png)
 
 The world that we see with our eyes is an example of analog image, which is a continuous representations of visual information, like a wave form.
 A digital image is a discrete approximation of this continuous image.
@@ -103,7 +103,7 @@ If the constraints follow, you can simply average K less noisy images and approx
 
 ![alt text](../images/image-5.png)
 
-![alt text](math-proof.jpeg)
+![alt text](../images/math-proof.jpeg)
 
 
 #### Image transformation using logical operators
