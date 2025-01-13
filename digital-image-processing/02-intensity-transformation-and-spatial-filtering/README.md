@@ -71,3 +71,73 @@ c: Positive scaling constant to control brightness.
 
 Both of them have an inverse effect.
 
+
+### Piecewise Linear Transformation
+
+A piecewise linear transformation is a type of intensity transformation in image processing where the mapping of input intensity values to output values is defined by multiple linear segments. Instead of a single mathematical function, the transformation is broken into "pieces," with each piece being a linear equation that applies to a specific range of input intensity values.
+
+
+1. Contrast Stretching
+
+Low-contrast images can result from poor illumination, lack of dynamic range in the imaging sensor, or even the wrong setting of a lens aperture during image acquisition. Contrast stretching expands the range of intensity levels in an image so that it spans the ideal full intensity range of the recording medium or display device.
+
+The goal is to map the intensity values of the input image *r* to *s* such that the range of intensities in the output image spans the ideal range [0 , L−1], where 
+L−1 is the maximum intensity of the display.
+
+the transformation s = T(r) is defined using two control points (r1, s1) and (r2, s2) and these determine shape of the transformation curve.  The curve can stretch, compress, or threshold intensity values depending on the placement of these points.
+
+- if r1 = s1 and r2 = s2, it becomes a linear transformation.
+- if r1 = r2 and s2 = L - 1, the transformation produces a binary image by mapping intensities below r1 to 0 and above r1 to L − 1.
+
+Steps to perform this
+1. Find the minimum(rmin) and max(rmax) intensity values in the image.
+2. set the control points
+(r1, s1) = (rmin, 0) (Maps the minimum intensity to the lowest output value)
+(r2, s2) = (rmax, L - 1) (Maps the maximum intensity to the highest output value)
+3. Apply this transformation.
+
+![alt text](image-2.png)
+
+[notebook](../algorithms/03-contrastive-strecthing.ipynb)
+
+
+2. Intensity Level Slicing
+
+Intensity-level slicing is a technique used to highlight a specific range of intensities in an image.
+
+#### Histogram Processing 
+
+A histogram is a graphical representation of the intensity distribution of an image. It shows the number of pixels for each intensity level.
+
+![alt text](image-3.png)
+
+Histogram Equalization
+
+Histogram equalization transforms the intensity values of an image such that the output image has a uniform distribution of intensities. This enhances the contrast by spreading out the intensity values more evenly across the available range.
+
+```
+s = T(r)
+```
+0 <= r <= L - 1
+
+s - transformed pixels
+r - original pixels
+T - transformation function
+
+To perform the transformation, T(r) must satisfy -
+1. Monotonicity: T(r) must be non-decreasing so that intensities do not reverse.
+2. Range Preservation: T(r) maps the range [0, L − 1] in to the same range in 𝑠.
+
+The T(r) is given by the cumulative distributive function .
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
+The integral represents the area under the PDF curve up to r. Multiplying by L − 1 ensures that the output intensity s spans the range [0, L − 1].
+
+
+For discrete values, the function becomes -
+
+![alt text](image-6.png)
+
