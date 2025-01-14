@@ -47,7 +47,7 @@ Key Characteristics of Log Transformation
 
 For example, note how input levels in the range [0, L/4] map to output levels to the range [0, 3L/4]
 
-![alt text](image.png)
+![alt text](../images/log-transformation.png)
 
 3. GAMMA TRANSFORMATIONS
 
@@ -56,7 +56,7 @@ s = (c . r)γ
 c: Positive scaling constant to control brightness.
 γ: Positive constant or the gamma exponent.
 
-![alt text](image-1.png)
+![alt text](../images/gamma-transformation.png)
 
 ( 𝛾 < 1)
 - Expands the range of dark input values into a wider range of output values.
@@ -96,7 +96,7 @@ Steps to perform this
 (r2, s2) = (rmax, L - 1) (Maps the maximum intensity to the highest output value)
 3. Apply this transformation.
 
-![alt text](image-2.png)
+![alt text](../images/contrast-stretching.png)
 
 [notebook](../algorithms/03-contrastive-strecthing.ipynb)
 
@@ -109,7 +109,7 @@ Intensity-level slicing is a technique used to highlight a specific range of int
 
 A histogram is a graphical representation of the intensity distribution of an image. It shows the number of pixels for each intensity level.
 
-![alt text](image-3.png)
+![alt text](../images/hist.png)
 
 Histogram Equalization
 
@@ -130,14 +130,14 @@ To perform the transformation, T(r) must satisfy -
 
 The T(r) is given by the cumulative distributive function .
 
-![alt text](image-4.png)
+![alt text](../images/cdf.png)
 
-![alt text](image-5.png)
+![alt text](../images/var.png)
 
 The integral represents the area under the PDF curve up to r. Multiplying by L − 1 ensures that the output intensity s spans the range [0, L − 1].
 
 
 For discrete values, the function becomes -
 
-![alt text](image-6.png)
+![alt text](../images/discrete.png)
 
