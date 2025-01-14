@@ -141,3 +141,18 @@ For discrete values, the function becomes -
 
 ![alt text](../images/discrete.png)
 
+
+#### Spatial filtering
+
+The name filter is borrowed from frequency domain processing where “filtering” refers to passing, modifying, or rejecting specified fre
+quency components of an image.
+
+A filter that passes low frequencies is called a lowpass filter.
+
+Spatial filtering is a process used in image processing to modify an image based on the spatial relationship between pixels. It works by replacing the value of each pixel with a new value computed using a specific function applied to the pixel and its neighboring pixels. 
+
+Linear Spatial filtering
+
+A linear spatial filter performs a sum-of-products operation between an image f and a filter kernel, w. The kernel is an array whose size defines the neighborhood of opera
+tion, and whose coefficients determine the nature of the filter. Basically you have a kernel sliding through the image.
+
